@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require("auto/ui/parser")
+
+Auto::Ui::Parser.new(*ARGV).run
