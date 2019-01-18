@@ -20,13 +20,14 @@ module Auto
         pid = `ps -h | grep "#{match}" | grep -v grep`.split[0]
         if (pid && pid.to_i > 0)
           start_with_pid(pid)
+          activate
         else
           start(cmd)
         end
       end
 
       def start_with_pid(pid)
-        @wid = `xdotool search --pid #{pid}`.split[0]
+        @wid = `xdotool search --pid #{pid}`.split.max
         set_current_size
       end
 
@@ -85,7 +86,7 @@ module Auto
       end
 
       def goto(x, y)
-        clone.goto!(x, y)
+        goto!(x, y)
       end
 
       def sleep(count = 0.4)

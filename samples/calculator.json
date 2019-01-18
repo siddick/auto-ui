@@ -1,7 +1,32 @@
-[
-    ["start_if_not", "gnome-calculator"],
-    ["move", 0, 0],
-    ["resize", 800, 800],
-    ["sleep", 2],
-    ["close"]
-]
+{
+    "steps": [
+        "start",
+        "sleep",
+        "press-c",
+        "press-1",
+        ["sleep", 5]
+    ],
+    "macros": {
+        "start": {
+            "steps": [
+                ["start_if_not", "gnome-calculator"],
+                ["move", 0, 0],
+                "resize"
+            ]
+        },
+        "press-1": {
+            "steps": [
+                ["goto", 120, 698],
+                ["click", 1]
+            ]
+        },
+        "press-c": {
+            "steps": [
+                ["goto", 688, 617],
+                ["click", 1]
+            ]
+        },
+        "sleep": ["sleep", 2],
+        "resize": ["resize", 800, 800]
+    }
+}
