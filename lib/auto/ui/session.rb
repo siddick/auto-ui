@@ -27,7 +27,8 @@ module Auto
       end
 
       def start_with_pid(pid)
-        @wid = `xdotool search --pid #{pid}`.split.max
+        @wids = `xdotool search --pid #{pid}`.split
+        @wid = @wids[0]
         set_current_size
       end
 
@@ -108,11 +109,16 @@ module Auto
       end
 
       def activate
-        run("windowactivate", @wid)
+        puts "WIDS: #{@wids.inspect}"
+        if @wids
+          @wids.each { |wid| run("windowactivate", wid); sleep 1 }
+        elsif @wid
+          run("windowactivate", @wid)
+        end
       end
 
-      def click(count = 1)
-        run("mousemove", @x, @y, "click", count)
+      def click(count = 1, x = nil, y = nil)
+        run("mousemove", x || @x, y || @y, "click", count)
       end
     end
   end

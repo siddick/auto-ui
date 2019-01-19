@@ -21,7 +21,9 @@ module Auto
           end
         else
           @macros.unshift(steps["macros"]) if steps["macros"]
-          run_steps(steps["steps"])
+          (steps["times"] || 1).times do
+            run_steps(steps["steps"])
+          end
           @macros.shift() if steps["macros"]
         end
       end
